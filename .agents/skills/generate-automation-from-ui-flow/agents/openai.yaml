@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Automation From UI Flow"
+  short_description: "Thực thi UI flow trực tiếp trên browser, thu thập locators từ..."
+  default_prompt: "Use $generate-automation-from-ui-flow to perform this QA task."

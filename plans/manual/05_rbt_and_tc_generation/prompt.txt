@@ -1,0 +1,179 @@
+# ============================================================
+# BƯỚC 5: SINH TEST CASE CHI TIẾT (RBT & TC Generation)
+# ============================================================
+# Đây là prompt độc lập — copy & paste vào bất kỳ AI nào
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI đã review và xác nhận scenarios ở Bước 4
+# 2. Tùy chỉnh phần [Gợi ý] nếu cần focus vào module cụ thể
+# 3. Nếu nhiều modules → yêu cầu AI sinh từng module một
+# 4. Review test cases → sang Bước 6
+# ============================================================
+
+---START---
+
+Áp dụng chiến lược **Risk-Based Testing (RBT)**, hãy sinh ra danh sách Test Case chi tiết từ các High-Level Scenarios đã được review ở Bước 4.
+
+## Yêu cầu cho mỗi Test Case:
+
+### 1. Đánh giá rủi ro (Risk Assessment)
+
+Đánh giá **Risk Level** cho mỗi Module/Tính năng:
+- **High Risk:** Nghiệp vụ cốt lõi, liên quan tiền/bảo mật, nhiều user phụ thuộc → Sinh nhiều test cases, test kỹ
+- **Medium Risk:** Tính năng quan trọng nhưng không critical → Test vừa phải
+- **Low Risk:** Tính năng phụ, ít ảnh hưởng → Test cơ bản, happy path
+
+### 2. Cấu trúc Test Case
+
+Mỗi Test Case phải có đầy đủ:
+
+| Field | Yêu cầu |
+|-------|---------|
+| **Module / Sub-module** | Tên module đã phân rã ở Bước 3 |
+| **Test Case Title** | Tiêu đề ngắn gọn, rõ mục đích |
+| **Pre-conditions** | Điều kiện tiên quyết trước khi test |
+| **Test Steps** | Các bước thực hiện, **đánh số thứ tự** |
+| **Expected Results** | Kết quả mong đợi tương ứng từng bước, **đánh số** |
+| **Test Data** | Dữ liệu cụ thể (xem quy tắc bên dưới) |
+| **Priority** | High / Medium / Low |
+| **Risk Level** | High / Medium / Low |
+
+### 3. Quy tắc Test Data
+
+Test Data **PHẢI CỤ THỂ**, không được dùng mô tả chung chung:
+
+```
+❌ SAI: "Nhập email hợp lệ"
+✅ ĐÚNG: "Nhập email: test_customer_01@domain.com"
+
+❌ SAI: "Nhập mã số hợp lệ"
+✅ ĐÚNG: "Nhập mã: KH-2026-0012"
+
+❌ SAI: "Nhập số điện thoại sai định dạng"
+✅ ĐÚNG: "Nhập SĐT: abc123xyz (chữ cái thay vì số)"
+
+❌ SAI: "Nhập tên quá dài"
+✅ ĐÚNG: "Nhập tên: [chuỗi 256 ký tự 'A' liên tiếp] (vượt giới hạn 255)"
+```
+
+### 4. Phạm vi bao phủ
+
+Đảm bảo các Test Cases bao phủ đa dạng:
+- **Happy Path:** Luồng chính đi trơn tru
+- **Negative Path:** Nhập sai, thiếu dữ liệu, sai định dạng
+- **Boundary Values:** Giá trị biên (min, max, min-1, max+1)
+- **Edge Cases:** Timeout, mất kết nối, concurrent access
+
+[Gợi ý bổ sung (tùy chỉnh theo dự án):
+- Phân quyền: User role A có quyền gì, không có quyền gì
+- Tương thích: Responsive design, multi-browser
+- Performance: Xử lý danh sách lớn (1000+ records)
+- ...]
+
+### 5. Validation chuyên biệt từng trường (Field-Level Validation)
+
+**BẮT BUỘC:** Khi form/UI có các input fields, phải:
+1. **Liệt kê tất cả input fields** trên form/UI đang test
+2. **Sinh validation TCs riêng cho TỪNG trường** theo đặc tính riêng của field đó
+3. **KHÔNG gộp** validation nhiều trường vào 1 test case
+
+Áp dụng checklist validation theo loại field:
+
+| Loại Field | Validation cần test |
+|---|---|
+| **Text (Name, Address...)** | Required/Optional · Min length · Max length · Whitespace-only · Ký tự đặc biệt (`<>&"'`) · XSS (`<script>alert(1)</script>`) · SQL injection (`' OR 1=1--`) · Unicode/Emoji · Leading/trailing spaces |
+| **Email** | Format hợp lệ · Thiếu `@` · Thiếu domain · Domain không hợp lệ · Nhiều `@` · Ký tự đặc biệt · Max length · Case sensitivity · Email trùng (nếu unique) |
+| **Phone** | Chỉ số · Prefix hợp lệ (`+84`, `0`) · Min/Max length · Chữ cái xen lẫn · Dấu `-`, `.`, khoảng trắng · Mã vùng không hợp lệ |
+| **Date / DateTime** | Format đúng · Ngày không tồn tại (`31/02`) · Năm nhuận (`29/02/2024`) · Quá khứ/tương lai · Min/Max date · Timezone |
+| **Number / Currency** | Min/Max value · Số âm · Số 0 · Thập phân · Ký tự không phải số · Overflow · Leading zeros · Định dạng currency |
+| **Dropdown / Select** | Giá trị mặc định · Tất cả options · Option disabled · Required (chưa chọn) |
+| **Checkbox / Radio** | Trạng thái mặc định · Check/Uncheck · Required · Nhóm radio (chỉ 1) |
+| **File Upload** | File type hợp lệ/không hợp lệ · Max size · File rỗng (0 KB) · Tên file ký tự đặc biệt · Multiple files |
+| **Password** | Min/Max length · Ký tự đặc biệt · Chữ hoa/thường · Số · Copy-paste · Hiện/ẩn · Confirm password |
+| **Textarea** | Max length · Line breaks · HTML tags · Character counter |
+
+**Ví dụ Field-Level Validation cho form "Đăng ký":**
+```
+Form có 4 trường: Họ tên, Email, SĐT, Mật khẩu
+
+→ Trường "Họ tên" (Text, max 100 ký tự, required):
+  - TC: Để trống → Báo lỗi required
+  - TC: Nhập 1 ký tự → Hợp lệ (hoặc báo lỗi min length)
+  - TC: Nhập 100 ký tự → Hợp lệ (max)
+  - TC: Nhập 101 ký tự → Báo lỗi vượt max
+  - TC: Nhập chỉ khoảng trắng → Báo lỗi
+  - TC: Nhập <script>alert(1)</script> → Không thực thi script
+
+→ Trường "Email" (Email, required, unique):
+  - TC: Nhập test@domain.com → Hợp lệ
+  - TC: Nhập testdomain.com (thiếu @) → Báo lỗi format
+  - TC: Nhập test@.com (thiếu domain) → Báo lỗi
+  - TC: Nhập email đã tồn tại → Báo lỗi trùng
+
+→ Trường "SĐT" (Phone, 10 số, bắt đầu bằng 0):
+  - TC: Nhập 0912345678 → Hợp lệ
+  - TC: Nhập 912345678 (thiếu prefix 0) → Báo lỗi
+  - TC: Nhập 091234567 (9 số) → Báo lỗi min length
+  - TC: Nhập abc1234567 → Báo lỗi chỉ chấp nhận số
+
+→ Trường "Mật khẩu" (Password, 8-20, cần chữ hoa + số):
+  - TC: Nhập Abcdef12 (8 ký tự, có chữ hoa + số) → Hợp lệ
+  - TC: Nhập abcdefgh (chỉ chữ thường) → Báo lỗi
+  - TC: Nhập 1234567 (7 ký tự) → Báo lỗi min length
+```
+
+> Hãy xác định đặc tính từng field (type, required, min/max, format, unique...) từ requirements trước khi sinh TCs.
+
+### 6. Kỹ thuật thiết kế Test Case (Test Design Techniques)
+
+Áp dụng các kỹ thuật kinh điển sau để sinh test case có hệ thống:
+
+**a) Equivalence Partitioning (Phân lớp tương đương)**
+Chia dữ liệu đầu vào thành các nhóm tương đương, chỉ cần test 1 giá trị đại diện mỗi nhóm.
+```
+Ví dụ với trường "Tuổi" (hợp lệ: 18-60):
+- Lớp hợp lệ: 25 (đại diện 18-60)
+- Lớp không hợp lệ dưới: 10 (đại diện <18)
+- Lớp không hợp lệ trên: 70 (đại diện >60)
+```
+
+**b) Boundary Value Analysis — BVA (Phân tích giá trị biên)**
+Test các giá trị tại ranh giới: min, min+1, max-1, max, min-1, max+1.
+```
+Ví dụ với trường "Mật khẩu" (6-20 ký tự):
+- 5 ký tự (biên dưới -1) → Báo lỗi
+- 6 ký tự (biên dưới)    → Hợp lệ
+- 7 ký tự (biên dưới +1) → Hợp lệ
+- 19 ký tự (biên trên -1) → Hợp lệ
+- 20 ký tự (biên trên)    → Hợp lệ
+- 21 ký tự (biên trên +1) → Báo lỗi
+```
+
+**c) Decision Table (Bảng quyết định)**
+Dùng khi logic có nhiều điều kiện kết hợp (AND/OR). Liệt kê tổ hợp điều kiện → kết quả.
+```
+Ví dụ với chức năng "Đăng nhập":
+| Email hợp lệ | Password đúng | Tài khoản active | Kết quả         |
+|:---:|:---:|:---:|---|
+| ✅ | ✅ | ✅ | Đăng nhập thành công |
+| ✅ | ❌ | ✅ | Báo sai mật khẩu |
+| ❌ | ✅ | ✅ | Báo email không tồn tại |
+| ✅ | ✅ | ❌ | Báo tài khoản bị khóa |
+```
+
+**d) State Transition (Chuyển đổi trạng thái)**
+Dùng cho đối tượng có nhiều trạng thái chuyển đổi (workflow, order status...).
+```
+Ví dụ với trạng thái Đơn hàng:
+Mới tạo → Đang xử lý → Đang giao → Hoàn thành
+                      → Hủy đơn
+Test: Mỗi transition hợp lệ + các transition KHÔNG hợp lệ (VD: Hoàn thành → Mới tạo)
+```
+
+> Hãy chọn kỹ thuật phù hợp cho từng Module/Field dựa trên đặc tính dữ liệu và logic nghiệp vụ.
+
+---
+
+> 💡 **Lưu ý:** Nếu số lượng scenarios ở Bước 4 quá nhiều, hãy sinh Test Case **từng Module một**.
+> Ví dụ: "Hãy sinh TC cho Module 1 và Module 2 trước tiên. Tôi sẽ yêu cầu tiếp cho các module còn lại."
+

@@ -1,0 +1,73 @@
+$generate-api-tests-from-swagger
+
+# CONTEXT
+- Framework: [REST Assured (Java) / Playwright API (TypeScript) / Supertest (TypeScript) / Requests + Pytest (Python)]
+- Mode: [SPEC (chỉ test cases) / FULL (test cases + automation scripts)]
+- Authentication: [Bearer Token / Basic Auth / API Key / OAuth2]
+
+# API SPECIFICATION
+[Cung cấp 1 trong các cách sau:]
+
+## Cách 1: Swagger/OpenAPI URL
+- Swagger URL: [https://api.example.com/swagger.json]
+- (Hỗ trợ: Swagger UI, Scalar, Redoc, Stoplight, RapiDoc — Agent tự tìm spec URL gốc)
+
+## Cách 2: Mô tả API thủ công
+- Base URL: [https://api.example.com/v1]
+
+POST /api/customers
+- Request: { name, email, phone, age }
+- Response 201: { id, name, email, phone, age, createdAt }
+- Response 400: { error: "Validation failed" }
+
+GET /api/customers
+- Query params: page, limit, sort, search
+- Response 200: { data: [...], total, page, limit }
+
+GET /api/customers/{id}
+- Response 200: { id, name, email, phone }
+- Response 404: { error: "Not found" }
+
+PUT /api/customers/{id}
+- Request: { name, email, phone }
+- Response 200: { id, name, email, phone, updatedAt }
+
+PATCH /api/customers/{id}
+- Request: { name } (partial update)
+- Response 200: { id, name, email, phone, updatedAt }
+
+DELETE /api/customers/{id}
+- Response 204: No content
+- Response 404: { error: "Not found" }
+
+# SCOPE (tùy chọn)
+- [Tất cả endpoints / Chỉ nhóm CRUD / Chỉ Auth endpoints / ...]
+
+# OUTPUT FORMAT
+## Mode SPEC:
+1. API Overview (base URL, auth, endpoints)
+2. Test Cases chi tiết theo 7 loại:
+   - Happy Path
+   - Negative (Validation + Auth)
+   - Boundary Values
+   - Edge Cases
+   - Field-Level Validation (từng field trong request body)
+   - Security (injection, IDOR, sensitive data)
+   - Pagination & Filtering (cho GET list)
+3. Test Data Matrix (valid / invalid / boundary)
+4. PUT vs PATCH distinction (nếu có)
+5. Execution Order & Dependencies
+
+## Mode FULL:
+1. Tất cả Mode SPEC, cộng thêm:
+2. API Client/Helper class (base URL, auth, logging)
+3. Model/DTO classes
+4. Test classes (assertions: status code + body + schema + headers)
+5. Test Data generators (unique + traceable)
+6. Kết quả chạy test (PASS/FAIL summary)
+
+# GHI CHÚ
+- Mode SPEC: Agent chỉ sinh test cases dạng tài liệu
+- Mode FULL: Agent sinh code + chạy test + auto-heal nếu FAIL
+- Agent BẮT BUỘC phải liệt kê từng field trong request body và sinh validation TCs riêng cho TỪNG field
+- Agent phải sinh Security test cases (injection, IDOR, auth bypass, sensitive data)

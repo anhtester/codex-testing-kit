@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Requirements From Website"
+  short_description: "Generate Requirements content from a provided website module"
+  default_prompt: "Use $generate-requirements-from-website to perform this QA task."

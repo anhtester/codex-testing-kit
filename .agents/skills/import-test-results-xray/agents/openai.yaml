@@ -1,0 +1,4 @@
+interface:
+  display_name: "Import Test Results Xray"
+  short_description: "Đẩy kết quả test automation (Playwright/JUnit/Allure) lên Xra..."
+  default_prompt: "Use $import-test-results-xray to perform this QA task."

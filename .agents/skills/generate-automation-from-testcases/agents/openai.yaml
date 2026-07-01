@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Automation From Testcases"
+  short_description: "Convert manual test cases into automation scripts autonomousl..."
+  default_prompt: "Use $generate-automation-from-testcases to perform this QA task."

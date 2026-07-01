@@ -1,0 +1,71 @@
+# ============================================================
+# BƯỚC 6: KIỂM DUYỆT & TỐI ƯU (Review & Refactoring)
+# ============================================================
+# Workflow: $generate-automation-from-testcases (tiếp tục)
+# Skill:    $qa-automation-engineer
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI test đã chạy PASS ở Bước 5
+# 2. AI sẽ review và cleanup code
+# 3. Nhận code final → merge vào repository
+# ============================================================
+
+---START---
+
+Test đã chạy **PASS** trên máy cá nhân. Trước khi merge vào repository, hãy review và tối ưu code.
+
+## Nhiệm vụ Refactoring:
+
+### 1. Xóa debug artifacts
+
+- Xóa toàn bộ `console.log`, `System.out.println`, `print()` sinh ra khi debug
+- Xóa code bị comment (`//`, `/* */`) không còn dùng
+- Xóa biến/locator khai báo mà không sử dụng (unused code)
+
+### 2. Kiểm tra code quality
+
+- [ ] Tên biến, method có rõ nghĩa không?
+- [ ] Có method nào quá dài cần tách không? (>20 dòng)
+- [ ] Có logic trùng lặp cần extract thành helper không?
+- [ ] Import statements có sạch không?
+
+### 3. Kiểm tra test stability
+
+- [ ] Có hard sleep nào lọt qua không?
+- [ ] Assertions có đủ và chính xác không?
+- [ ] Test data có unique mỗi lần chạy không?
+- [ ] Mỗi test case có độc lập không? (không phụ thuộc test khác)
+
+### 4. CI/CD Readiness
+
+[Tùy chỉnh theo framework của bạn:]
+
+Playwright:
+```typescript
+// Gắn tag để chạy selective
+test.describe('Login Module', () => {
+  test.describe.configure({ mode: 'parallel' });
+  // ...
+});
+```
+
+Selenium/TestNG:
+```java
+@Test(groups = {"smoke", "regression"})
+public void testLoginSuccess() { ... }
+```
+
+Appium:
+```java
+@Test(groups = {"mobile", "regression"})
+public void testLoginMobile() { ... }
+```
+
+### 5. Documentation (tùy chọn)
+
+- Thêm comment mô tả cho method phức tạp
+- Cập nhật README nếu có thay đổi cấu trúc project
+
+---
+
+Hãy trả lại phiên bản code **cuối cùng hoàn thiện nhất** (Clean Code), sẵn sàng commit.

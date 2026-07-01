@@ -1,0 +1,62 @@
+# ============================================================
+# BƯỚC 2: PHÂN TÍCH & ĐIỀU TRA UI (Analysis & UI Recon)
+# ============================================================
+# Workflow: $generate-automation-from-testcases (tiếp tục)
+# Skill:    $qa-automation-engineer + $ui-debug-agent
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI AI đã xác nhận ở Bước 1
+# 2. Điền URL, tài khoản test, và Manual Test Cases
+# 3. AI sẽ TỰ ĐỘNG mở browser, inspect DOM, thu thập locators
+# 4. Review bảng locators AI trả về → sang Bước 3
+# ============================================================
+
+---START---
+
+Dưới đây là **Manual Test Cases** cần tự động hóa. Trước khi viết code, bạn **BẮT BUỘC** phải khảo sát lấy locators thật trên UI (UI Recon).
+
+## Thông tin môi trường
+
+- **URL:** [Nhập URL. Ví dụ: https://dev.crm.system.local/login]
+- **Tài khoản Test:** [Ví dụ: user_admin@domain.com / password123]
+- **Trình duyệt:** [Chrome / Firefox / Edge — mặc định Chromium]
+
+## Manual Test Cases
+
+[Copy/Paste các Manual Test Cases vào đây. Ví dụ:
+
+**TC_01: Đăng nhập thành công**
+1. Mở trang Login
+2. Nhập email hợp lệ: admin@crm.com
+3. Nhập password hợp lệ: Admin@123
+4. Click nút "Đăng nhập"
+5. Verify: Chuyển hướng sang Dashboard, hiển thị tên user
+
+**TC_02: Đăng nhập thất bại — sai password**
+1. Mở trang Login
+2. Nhập email: admin@crm.com
+3. Nhập password sai: WrongPass
+4. Click nút "Đăng nhập"
+5. Verify: Hiển thị thông báo lỗi "Sai mật khẩu"]
+
+---
+
+## Nhiệm vụ
+
+Sử dụng **công cụ trình duyệt** (Playwright MCP / Selenium MCP) để:
+
+1. **Mở browser** với URL đã cung cấp (viewport 1920x1080)
+2. **Điều hướng** theo từng bước trong Test Cases
+3. **Thu thập** tất cả locators cần thiết bằng cách:
+   - Đọc Accessibility Tree
+   - Inspect DOM attributes: `id`, `data-testid`, `name`, `aria-label`, `role`, `placeholder`
+   - TUYỆT ĐỐI **không đoán** selector — chỉ lấy từ DOM thật
+4. **Ưu tiên** locator theo thứ tự (tham khảo `.agents/rules/locator_strategy.md`):
+   - Playwright: `getByRole` > `getByLabel` > `getByPlaceholder` > `getByTestId` > CSS > XPath
+   - Selenium: `id` > `data-testid` > `name` > `cssSelector` > `xpath`
+5. **Trả kết quả** dưới dạng bảng:
+
+| Page | Element | Locator Type | Locator Value | Fallback Locator |
+|------|---------|-------------|---------------|------------------|
+
+⏸️ **Dừng lại** sau khi hoàn thành bảng locators để tôi review trước khi sang Bước 3.

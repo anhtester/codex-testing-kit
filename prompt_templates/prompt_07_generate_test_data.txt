@@ -1,0 +1,15 @@
+$generate-test-data
+
+# CONTEXT
+- Module: [Tên module. Ví dụ: Quản lý Khách hàng]
+- Các trường dữ liệu: [Liệt kê fields. Ví dụ: Tên, Email, SĐT, Địa chỉ, Mã KH]
+- Ràng buộc:
+  [Mô tả validation rules. Ví dụ:
+  - Tên: 2-100 ký tự, không chứa số
+  - Email: format chuẩn, unique
+  - SĐT: 10 số, bắt đầu bằng 0]
+
+# OUTPUT FORMAT
+| # | Nhóm | Tên field | Giá trị | Mục đích test | Expected |
+
+Kèm code class DataGenerator (Java hoặc TypeScript tùy project).

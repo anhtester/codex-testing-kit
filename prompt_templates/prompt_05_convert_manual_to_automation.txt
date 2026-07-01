@@ -1,0 +1,51 @@
+$generate-automation-from-testcases
+
+# CONTEXT
+- Framework: [Playwright / Selenium / Appium]
+- Language: [TypeScript / Java / Python]
+- Design Pattern: Page Object Model (POM)
+- Mode: FULL (tự inspect UI + sinh code + chạy test + auto-heal)
+
+# HỆ THỐNG
+- URL: [URL ứng dụng]
+- Tài khoản test: [Dùng fixture/config sẵn có / hoặc EMAIL + PASSWORD]
+- Môi trường: [Dev / Staging / Production]
+
+# PROJECT (chọn 1 trong 2)
+
+## A. Đã có sẵn source code (EXISTING PROJECT)
+- Project path: [path/to/project]
+- Agent PHẢI đọc project structure, base classes, fixtures, config trước khi sinh code
+- Agent PHẢI tuân thủ conventions đã có (naming, folder, patterns)
+- Agent PHẢI reuse base classes, fixtures, utils — KHÔNG tạo trùng
+- Agent PHẢI sinh file đúng vị trí trong project structure hiện tại
+
+## B. Chưa có project (NEW PROJECT)
+- Agent tự scaffold structure theo workflow `$generate-automation-framework`
+
+# TEST CASES
+[Một trong 3 cách cung cấp test cases:]
+
+## Cách 1: Dán trực tiếp
+| TC ID | Title | Steps | Expected Result | Priority |
+|---|---|---|---|---|
+| TC01 | Login thành công | 1. Mở trang login 2. Nhập email hợp lệ 3. Nhập password hợp lệ 4. Click Login | Chuyển đến Dashboard | P1 |
+| TC02 | Login sai password | 1. Mở trang login 2. Nhập email hợp lệ 3. Nhập password sai 4. Click Login | Hiển thị thông báo lỗi | P1 |
+
+## Cách 2: File path
+File test cases: [path/to/testcases.md]
+
+## Cách 3: URL (Google Sheets, Confluence)
+URL test cases: [https://docs.google.com/spreadsheets/...]
+
+# OUTPUT FORMAT
+- Page Object classes (Sinh code đúng vị trí theo conventions)
+- Test classes (Kế thừa base hoặc fixture sẵn có, Arrange → Act → Assert)
+- Utilities / Data Generators (Reuse hoặc bổ sung mới)
+- Artifact task.md (checklist tiến độ các bước)
+- Kết quả chạy test (PASS/FAIL summary - test phải PASS 2 lần liên tiếp)
+
+# GHI CHÚ
+- Agent tự mở browser inspect UI, thu thập locators thực tế
+- Agent tự chạy test và auto-heal nếu FAIL (Rule E3)
+- Nếu existing project: agent đọc code trước → tuân thủ patterns đã có

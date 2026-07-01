@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Cross Module Test Plan"
+  short_description: "Phân tích tính năng đi qua nhiều modules nối tiếp, xây dựng M..."
+  default_prompt: "Use $generate-cross-module-test-plan to perform this QA task."

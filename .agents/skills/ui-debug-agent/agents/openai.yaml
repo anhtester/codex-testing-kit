@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI Debug Agent"
+  short_description: "Skill inspect web/mobile applications bằng browser tools, phâ..."
+  default_prompt: "Use $ui-debug-agent to perform this QA task."

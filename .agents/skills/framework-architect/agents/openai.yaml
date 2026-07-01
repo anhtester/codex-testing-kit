@@ -1,0 +1,4 @@
+interface:
+  display_name: "Framework Architect"
+  short_description: "Skill thiết kế và scaffold automation framework hoàn chỉnh ch..."
+  default_prompt: "Use $framework-architect to perform this QA task."

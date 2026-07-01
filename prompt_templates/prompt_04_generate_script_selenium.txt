@@ -1,0 +1,44 @@
+$generate-automation-from-testcases
+
+# CONTEXT
+- Language: Java
+- Test Framework: TestNG
+- Automation Tool: Selenium WebDriver v4
+- Design Pattern: Page Object Model (POM)
+- Build tool: Maven
+
+# HỆ THỐNG
+- URL: [URL hệ thống]
+- Tài khoản test: [Dùng fixture sẵn có / hoặc EMAIL + PASSWORD]
+
+# PROJECT (chọn 1 trong 2)
+
+## A. Đã có sẵn source code (EXISTING PROJECT)
+- Project path: [path/to/project]
+- Agent PHẢI đọc project structure, base classes, config trước khi sinh code
+- Agent PHẢI tuân thủ conventions đã có (naming, folder, patterns)
+- Agent PHẢI reuse BasePage, BaseTest, DriverFactory, Utils — KHÔNG tạo trùng
+- Agent PHẢI sinh file đúng vị trí trong project structure hiện tại
+
+## B. Chưa có project (NEW PROJECT)
+- Agent tự scaffold structure theo workflow `$generate-automation-framework`
+
+# TEST CASES
+[DÁN TEST CASES VÀO ĐÂY — dưới dạng bảng hoặc danh sách steps]
+
+Ví dụ:
+| TC ID | Title | Steps | Expected Result | Priority |
+|---|---|---|---|---|
+| TC01 | Login thành công | 1. Mở trang login 2. Nhập email 3. Nhập password 4. Click Login | Dashboard hiển thị | P1 |
+
+# OUTPUT FORMAT
+- Page Object classes (Sinh đúng thư mục pages & tuân thủ naming convention)
+- Test classes (Kế thừa BaseTest, dùng TestNG annotations)
+- Utilities / Data Generators (Reuse utils hiện có hoặc bổ sung nếu cần)
+- Artifact task.md (checklist tiến độ các bước)
+- Kết quả chạy test (PASS/FAIL summary - test phải PASS 2 lần liên tiếp)
+
+# GHI CHÚ
+- Agent tự mở browser, inspect UI, thu thập locators từ DOM thực tế
+- Agent tự chạy test và auto-heal nếu FAIL (không hỏi user — Rule E3)
+- Nếu existing project: agent đọc code trước → tuân thủ patterns đã có

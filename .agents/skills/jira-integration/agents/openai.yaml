@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jira Integration"
+  short_description: "Skill tích hợp Jira/Xray — lấy requirements từ Jira, xác thực..."
+  default_prompt: "Use $jira-integration to perform this QA task."

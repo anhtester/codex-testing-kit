@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Requirement Document"
+  short_description: "Phân tích requirement document (Jira ticket, .doc, user story..."
+  default_prompt: "Use $analyze-requirement-document to perform this QA task."

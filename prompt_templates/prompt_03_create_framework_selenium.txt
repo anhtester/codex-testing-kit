@@ -1,0 +1,24 @@
+$generate-automation-framework
+
+# CONTEXT
+Tôi cần xây dựng Web UI Automation Framework từ đầu.
+- Công nghệ: Java 17+ + Selenium WebDriver v4 + TestNG
+- Build tool: Maven
+- Report: Allure Report
+- Logging: Log4j 2.x
+
+# HỆ THỐNG
+- URL: [URL hệ thống]
+- Tài khoản test: [EMAIL] / [PASSWORD]
+
+# OUTPUT FORMAT
+- Setup pom.xml (dependencies + plugins)
+- Triển khai Core components, Base classes
+- Khởi tạo Sample Page Object & Test
+- Cấu hình Utilities (Test Data, Logs, Screenshots)
+- Thiết lập CI/CD (GitHub Actions)
+- README.md hướng dẫn
+
+# GHI CHÚ
+- Agent tự scaffold TOÀN BỘ project structure dựa trên skill `$framework-architect`.
+- Agent tự verify framework hoạt động (compile + chạy example test).

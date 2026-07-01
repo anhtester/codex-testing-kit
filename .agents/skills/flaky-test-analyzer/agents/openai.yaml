@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flaky Test Analyzer"
+  short_description: "Skill phân tích và khắc phục các automation test không ổn địn..."
+  default_prompt: "Use $flaky-test-analyzer to perform this QA task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Data Generator"
+  short_description: "Skill sinh test data có cấu trúc, unique, traceable cho autom..."
+  default_prompt: "Use $test-data-generator to perform this QA task."

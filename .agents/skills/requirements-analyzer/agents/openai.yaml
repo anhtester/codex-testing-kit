@@ -1,0 +1,4 @@
+interface:
+  display_name: "Requirements Analyzer"
+  short_description: "Kỹ năng phân tích trang web/module và sinh ra tài liệu Yêu cầ..."
+  default_prompt: "Use $requirements-analyzer to perform this QA task."

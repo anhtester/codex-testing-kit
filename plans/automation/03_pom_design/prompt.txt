@@ -1,0 +1,63 @@
+# ============================================================
+# BƯỚC 3: THIẾT KẾ KIẾN TRÚC POM (POM Design)
+# ============================================================
+# Workflow: $generate-automation-from-testcases (tiếp tục)
+# Skill:    $qa-automation-engineer
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI đã review locators ở Bước 2
+# 2. AI sẽ thiết kế class Page Objects — CHƯA sinh test script
+# 3. Review kiến trúc POM → sang Bước 4
+# ============================================================
+
+---START---
+
+Dựa trên danh sách locators **đã thu thập từ DOM thật** ở Bước 2, hãy thiết kế kiến trúc **Page Object Model (POM)**.
+
+## Yêu cầu:
+
+### 1. Định nghĩa Class Page
+
+- Mỗi trang/section là 1 class riêng
+- Tên class mang ngữ nghĩa rõ ràng
+- Ví dụ: `LoginPage`, `DashboardPage`, `CustomerFormPage`, `CustomerListPage`
+
+### 2. Khai báo Locators
+
+- Sử dụng chính xác locators đã thu thập ở Bước 2
+- Ưu tiên bộ chọn vững chãi: `data-testid`, `id`, `name`, `role`
+- **Không tự thay đổi** locator so với Bước 2 trừ khi có lý do
+
+Ví dụ Playwright:
+```typescript
+readonly emailInput = this.page.getByLabel('Email');
+readonly submitButton = this.page.getByRole('button', { name: 'Submit' });
+```
+
+Ví dụ Selenium:
+```java
+private final By emailInput = By.id("email");
+private final By submitButton = By.cssSelector("button[data-testid='submit-btn']");
+```
+
+### 3. Đóng gói Methods
+
+- Đặt tên method theo hành động nghiệp vụ (không theo kỹ thuật)
+- Mỗi method thực hiện **1 hành động** rõ ràng
+- Return `this` hoặc Page tiếp theo (fluent pattern)
+
+```
+✅ ĐÚNG: fillCustomerForm(), submitAndVerifySuccess()
+❌ SAI:  clickButton(), inputText()
+```
+
+### 4. Quy tắc quan trọng
+
+- ⛔ **CHƯA sinh file Test script** — chỉ thiết kế Page classes
+- ✅ Phác thảo cấu trúc file, tên class, locator declarations, method signatures
+- ✅ Có thể viết body method nếu logic rõ ràng
+- ✅ Tuân thủ `.agents/rules/automation_rules.md` (naming conventions, POM structure)
+
+---
+
+Trình bày cấu trúc POM để tôi review kiến trúc trước khi sinh test script ở Bước 5.

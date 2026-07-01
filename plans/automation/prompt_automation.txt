@@ -1,0 +1,90 @@
+# ============================================================
+# ONE-CLICK AUTOMATION PROMPT
+# ============================================================
+# Workflow: $generate-automation-from-testcases
+# ============================================================
+#
+# CÁCH DÙNG:
+# 1. Copy toàn bộ nội dung bên dưới dòng "---START---"
+# 2. Thay thế các phần trong [...] bằng dữ liệu thực tế
+# 3. Paste vào Antigravity chat và gửi
+# 4. Ngồi chờ AI tự xử lý toàn bộ 6 bước
+#
+# ============================================================
+
+---START---
+
+$generate-automation-from-testcases
+
+Bạn là Senior Automation Engineer với 10 năm kinh nghiệm. Hãy tự động hóa toàn bộ Manual Test Cases bên dưới thành automation test script hoàn chỉnh, chạy được, PASS 100%.
+
+=== TECH STACK ===
+
+- Framework: [Chọn 1: Playwright (TypeScript) / Playwright (Java) / Selenium WebDriver (Java/TestNG) / Appium (Java)]
+- Ngôn ngữ: [TypeScript / Java]
+- Build tool: [npm / Maven / Gradle]
+- Test Runner: [Playwright Test / TestNG / JUnit]
+- Reporting: [Playwright HTML Reporter / Allure Report / ExtentReport]
+
+=== THÔNG TIN MÔI TRƯỜNG ===
+
+- URL: [Ví dụ: https://app.anhtester.com/login]
+- Tài khoản Test: [Ví dụ: admin@anhtester.com / Admin@123]
+- Trình duyệt: [Chrome / Firefox / Edge -- mặc định Chromium]
+
+=== KIẾN TRÚC PROJECT ===
+
+[Chọn 1 trong 2:]
+
+Option A: Tạo project mới -- AI tự tạo theo kiến trúc chuẩn POM
+
+Option B: Project có sẵn -- Mô tả cấu trúc thư mục hiện tại, ví dụ:
+  src/main/java/pages/     -> Page Objects
+  src/test/java/tests/     -> Test classes
+  src/main/java/utils/     -> Utilities
+  ...
+
+=== MANUAL TEST CASES ===
+
+[Dán toàn bộ Manual Test Cases vào đây, hoặc đính kèm file. Ví dụ:
+
+TC_LOGIN_001: Đăng nhập thành công với tài khoản hợp lệ
+- Tiền điều kiện: User đã có tài khoản active
+- Các bước:
+  1. Mở trang Login
+  2. Nhập email: admin@anhtester.com
+  3. Nhập password: Admin@123
+  4. Click nút Sign In
+- Kết quả mong đợi: Chuyển hướng sang Dashboard, hiển thị tên user Admin
+
+TC_LOGIN_002: Đăng nhập thất bại với password sai
+- Tiền điều kiện: User đã có tài khoản active
+- Các bước:
+  1. Mở trang Login
+  2. Nhập email: admin@anhtester.com
+  3. Nhập password sai: WrongPassword
+  4. Click nút Sign In
+- Kết quả mong đợi: Hiển thị thông báo lỗi Invalid credentials
+]
+
+=== NGUYÊN TẮC BẮT BUỘC ===
+
+1. DOM Recon First: Tự mở browser (MCP), inspect DOM thật để lấy locators. TUYỆT ĐỐI không đoán selector.
+2. Page Object Model: Phân tách rõ Pages và Tests.
+3. Smart Waits: KHÔNG BAO GIỜ dùng Thread.sleep, page.waitForTimeout. Chỉ auto-waiting.
+4. Unique Test Data: Dữ liệu unique + traceable format: auto_[testName]_[timestamp]@test.com
+5. Self-fix Loop: Sau khi sinh code, tự chạy test, nếu FAIL thì tự đọc log, tự sửa, chạy lại, đến khi PASS.
+6. Clean Code: Sau khi PASS, xóa debug logs, unused code, commented code, deliver bản sạch.
+
+=== QUY TRÌNH THỰC HIỆN (AI tự chạy toàn bộ) ===
+
+Tự động thực hiện tuần tự 6 bước sau mà KHÔNG cần hỏi tôi (trừ khi gặp business rule mâu thuẫn):
+
+1. Tiếp nhận context, xác nhận tech stack và scope
+2. Mở browser, điều hướng URL, inspect DOM, thu thập locators (bảng)
+3. Thiết kế POM, tạo Page classes với locators từ Bước 2
+4. Sinh Test Data, tạo class DataGenerator (unique + traceable)
+5. Sinh Test Script, viết test file, chạy test, self-fix loop đến khi PASS
+6. Dọn dẹp code, xóa debug artifacts, deliver bản clean code
+
+Bắt đầu ngay. Xác nhận ngắn gọn rồi tiến hành Bước 2 (mở browser inspect DOM).

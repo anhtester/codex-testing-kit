@@ -1,0 +1,72 @@
+# ============================================================
+# BƯỚC 4: CHIẾN LƯỢC DỮ LIỆU (Test Data Strategy)
+# ============================================================
+# Workflow: $generate-automation-from-testcases (tiếp tục)
+# Skill:    $qa-automation-engineer + $test-data-generator
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI đã review POM ở Bước 3
+# 2. AI sẽ sinh class Utils/DataProvider
+# 3. Review → sang Bước 5
+# ============================================================
+
+---START---
+
+Test automation bị flaky nếu dùng dữ liệu cứng (hardcode) cho các trường unique (Email, Username, Mã KH...).
+
+Hãy thiết kế **Test Data Strategy** theo yêu cầu sau:
+
+## 1. Class sinh dữ liệu (Data Generator)
+
+Viết class Utils/Helper để generate dữ liệu tự động:
+- Sử dụng thư viện phù hợp: **Faker** (JS/TS), **JavaFaker** (Java), hoặc UUID
+- Mỗi hàm sinh 1 loại data cụ thể
+
+## 2. Format traceable (truy vết được)
+
+Dữ liệu phải theo format:
+```
+[Prefix]_[TestName]_[Timestamp]_[Random]
+```
+
+Ví dụ cụ thể:
+```
+Email:    auto_createCustomer_20260402_A3F2@test.com
+Username: auto_login_20260402_7B4D
+Code:     KH-20260402-A3F2
+Phone:    09[random 8 digits]
+```
+
+> Nhìn vào database hoặc log → biết ngay data này do test nào sinh ra.
+
+## 3. Data cho từng loại test
+
+| Loại Test | Yêu cầu Data | Ví dụ |
+|-----------|-------------|-------|
+| **Happy Path** | Data hợp lệ, format đúng | `valid_email@test.com`, `Test@12345` |
+| **Negative** | Data sai format, thiếu field | `invalid-email`, `""`, `null` |
+| **Boundary** | Data tại ranh giới min/max | `"A"` (1 char), `"A"*256` (vượt max) |
+
+## 4. Tích hợp vào project
+
+Hướng dẫn cách sử dụng bộ data này trong Test Cases:
+
+Playwright:
+```typescript
+import { DataGenerator } from '../utils/data-generator';
+const testData = DataGenerator.createCustomer();
+```
+
+Selenium/Java:
+```java
+import utils.DataGenerator;
+String email = DataGenerator.generateEmail("createCustomer");
+```
+
+## 5. Quy tắc bắt buộc (tham khảo `.agents/rules/automation_rules.md`)
+
+- ❌ KHÔNG hardcode data cho trường unique
+- ❌ KHÔNG dùng data trùng lặp giữa các test
+- ✅ Data phải unique mỗi lần chạy
+- ✅ Data phải traceable (biết test nào sinh ra)
+- ✅ Hỗ trợ chạy parallel không conflict

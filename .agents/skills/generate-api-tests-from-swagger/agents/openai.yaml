@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate API Tests From Swagger"
+  short_description: "Sinh API test cases và automation scripts từ Swagger/OpenAPI..."
+  default_prompt: "Use $generate-api-tests-from-swagger to perform this QA task."

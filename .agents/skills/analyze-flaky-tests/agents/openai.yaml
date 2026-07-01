@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Flaky Tests"
+  short_description: "Phân tích automation tests không ổn định (flaky), xác định ro..."
+  default_prompt: "Use $analyze-flaky-tests to perform this QA task."

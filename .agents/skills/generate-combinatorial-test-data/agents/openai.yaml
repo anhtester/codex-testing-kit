@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Combinatorial Test Data"
+  short_description: "Sinh test data cho ma trận kết hợp đa chiều bằng pipeline chạ..."
+  default_prompt: "Use $generate-combinatorial-test-data to perform this QA task."

@@ -1,0 +1,59 @@
+# ============================================================
+# BƯỚC 2: PHÂN TÍCH YÊU CẦU VÀ Q&A (Analysis & QnA)
+# ============================================================
+# Đây là prompt độc lập — copy & paste vào bất kỳ AI nào
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI AI đã xác nhận hiểu bối cảnh ở Bước 1
+# 2. Đọc các câu hỏi AI sinh ra
+# 3. Trả lời từng câu hỏi cho AI
+# 4. Khi đã giải đáp hết → sang Bước 3
+# ============================================================
+
+---START---
+
+Dựa trên tài liệu yêu cầu và bối cảnh đã cung cấp ở Bước 1, hãy phân tích yêu cầu này một cách chi tiết.
+
+## Nhiệm vụ của bạn:
+
+### 1. Xác định luồng (Flows)
+
+Liệt kê đầy đủ các luồng:
+- **Happy Path:** Luồng nghiệp vụ chính đi trơn tru
+- **Alternate Paths:** Luồng rẽ nhánh hợp lệ (ví dụ: user chọn phương thức thanh toán khác)
+- **Exception Paths:** Luồng ngoại lệ / lỗi (ví dụ: mất kết nối, timeout, nhập sai định dạng)
+
+[Gợi ý bổ sung (nếu cần): Hãy đặc biệt chú ý phân tích các luồng:
+- Gián đoạn kết nối giữa chừng
+- Nhập sai định dạng dữ liệu
+- Upload file quá dung lượng
+- Thao tác đồng thời (concurrent access)
+- ...]
+
+### 2. Phát hiện điểm mờ (Ambiguity Detection)
+
+Phát hiện và liệt kê các điểm:
+- **Thiếu sót:** Thông tin chưa được đề cập trong tài liệu
+- **Mâu thuẫn:** Các yêu cầu trái ngược nhau
+- **Chưa rõ ràng:** Yêu cầu có thể hiểu theo nhiều cách
+
+[Gợi ý kiểm tra (nếu cần): Tài liệu đã quy định chưa?
+- Độ dài tối đa/tối thiểu từng trường Textbox
+- Timeout gọi API
+- Hành vi khi mất kết nối
+- Quy tắc phân quyền cụ thể
+- Định dạng dữ liệu đầu vào (email, SĐT, ngày tháng)
+- ...]
+
+### 3. Đặt câu hỏi (Q&A)
+
+Đặt ra danh sách câu hỏi **có đánh số thứ tự** để tôi hoặc PO/BA có thể giải đáp.
+Mỗi câu hỏi cần:
+- Đánh số rõ ràng (Q1, Q2, Q3...)
+- Nêu rõ ngữ cảnh tại sao cần hỏi
+- Đề xuất giả định (assumption) nếu không được trả lời
+
+---
+
+Hãy trình bày kết quả phân tích bằng **Markdown có cấu trúc rõ ràng**.
+⏸️ **SAU KHI HOÀN THÀNH**, hãy dừng lại và chờ tôi trả lời các câu hỏi trước khi sang Bước 3.

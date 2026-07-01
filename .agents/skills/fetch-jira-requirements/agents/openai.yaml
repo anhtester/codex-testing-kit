@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fetch Jira Requirements"
+  short_description: "Lấy Requirements / User Stories từ Jira ticket và lưu thành f..."
+  default_prompt: "Use $fetch-jira-requirements to perform this QA task."

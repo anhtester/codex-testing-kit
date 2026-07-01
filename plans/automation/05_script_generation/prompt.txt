@@ -1,0 +1,77 @@
+# ============================================================
+# BƯỚC 5: SINH MÃ AUTOMATION (Script Generation)
+# ============================================================
+# Workflow: $generate-automation-from-testcases (tiếp tục)
+# Skill:    $qa-automation-engineer
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI đã review POM (Bước 3) và Data (Bước 4)
+# 2. AI sẽ sinh file Test script hoàn chỉnh
+# 3. Chạy test → nếu fail → AI tự fix → lặp đến khi PASS
+# ============================================================
+
+---START---
+
+Mọi cấu trúc POM (Bước 3) và Test Data Strategy (Bước 4) đã sẵn sàng.
+
+Hãy viết **file Test script** hoàn chỉnh.
+
+## Yêu cầu bắt buộc:
+
+### 1. Cấu trúc code
+
+- Import và khởi tạo các Page classes đã viết ở Bước 3
+- Sử dụng Data Generator từ Bước 4
+- Chia code theo pattern **Arrange → Act → Assert**
+
+```
+Arrange: Setup data, khởi tạo pages
+Act:     Thực hiện hành động (navigate, fill, click)
+Assert:  Kiểm tra kết quả (verify, expect)
+```
+
+### 2. Assertions (Kiểm tra)
+
+- **BẮT BUỘC** có assertion ở cuối mỗi test case
+- Nên có assertion xen kẽ ở các bước quan trọng
+- Assert phải rõ ràng, mô tả đúng expected behavior
+
+Playwright:
+```typescript
+await expect(page.getByText('Đăng nhập thành công')).toBeVisible();
+await expect(page).toHaveURL(/dashboard/);
+```
+
+Selenium/TestNG:
+```java
+Assert.assertTrue(dashboardPage.isDisplayed(), "Dashboard should be visible after login");
+Assert.assertEquals(driver.getTitle(), "Dashboard");
+```
+
+### 3. Smart Waits
+
+- ⛔ **TUYỆT ĐỐI** không dùng: `Thread.sleep()`, `page.waitForTimeout()`, `time.sleep()`
+- ✅ Playwright: Tận dụng auto-waiting + `expect().toBeVisible()`
+- ✅ Selenium: Dùng `WebDriverWait` + `ExpectedConditions`
+
+### 4. Test Independence
+
+- Mỗi test case **độc lập** (không phụ thuộc test khác)
+- Setup/teardown rõ ràng (`beforeEach`, `afterEach` / `@BeforeMethod`, `@AfterMethod`)
+- Test data unique mỗi lần chạy
+
+### 5. Self-fix Loop (Chế độ tự sửa)
+
+Sau khi sinh code, AI **phải tự chạy test**:
+1. Execute test bằng terminal
+2. Nếu **PASS** → DONE, sang Bước 6
+3. Nếu **FAIL** → Đọc error log → Phân tích root cause → Sửa code → Chạy lại
+4. Lặp lại cho đến khi PASS ổn định
+5. **KHÔNG hỏi user** trong quá trình self-fix (trừ khi phát hiện business rule không rõ)
+
+---
+
+> ⚠️ Tham khảo framework-specific rules:
+> - Playwright: `.agents/rules/playwright_rules.md`
+> - Selenium: `.agents/rules/selenium_rules.md`
+> - Appium: `.agents/rules/appium_rules.md`

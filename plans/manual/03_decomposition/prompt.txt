@@ -1,0 +1,47 @@
+# ============================================================
+# BƯỚC 3: PHÂN RÃ HỆ THỐNG (Decomposition)
+# ============================================================
+# Đây là prompt độc lập — copy & paste vào bất kỳ AI nào
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI đã trả lời hết câu hỏi Q&A ở Bước 2
+# 2. Tùy chỉnh gợi ý phân rã nếu cần
+# 3. Review kết quả → sang Bước 4
+# ============================================================
+
+---START---
+
+Giả định rằng các yêu cầu đã được làm rõ thông qua quá trình Q&A ở Bước 2.
+
+Hãy tiến hành **phân rã hệ thống (Decomposition)** tính năng này thành các Module / Sub-module nhỏ hơn để dễ quản lý kiểm thử.
+
+## Yêu cầu output:
+
+### 1. Phân rã Module (Feature Mapping)
+
+Chia tính năng thành các Module và Sub-module cụ thể.
+
+[Gợi ý phạm vi phân rã (chọn 1 hoặc kết hợp):
+- **Theo cụm UI:** Header, Sidebar, Data Table, Form nhập liệu, Popup, Dialog...
+- **Theo luồng tác vụ:** Flow tạo mới, Flow chỉnh sửa, Flow xóa, Flow tìm kiếm...
+- **Theo đối tượng:** Quản lý User, Quản lý Product, Quản lý Order...]
+
+### 2. Mô tả chức năng
+
+Với mỗi Module/Sub-module, cung cấp:
+- Tên Module (đặt tên ngắn gọn, rõ nghĩa)
+- Mô tả chức năng (1-2 câu)
+- Các thành phần UI chính (nếu có)
+
+### 3. Sơ đồ phụ thuộc (Dependencies)
+
+Chỉ ra sự phụ thuộc và dữ liệu tương tác giữa các Module:
+
+[Gợi ý: Ví dụ:
+- Module "Data Table" hiển thị dữ liệu phụ thuộc vào dữ liệu từ Module "Form Đăng ký"
+- Module "Chi tiết Khách hàng" phụ thuộc vào Module "Danh sách Khách hàng"
+- Module "Xuất báo cáo" phụ thuộc vào dữ liệu chạy Filter/Search...]
+
+---
+
+Trình bày kết quả bằng **Markdown**, có thể dùng bảng hoặc sơ đồ cây (tree diagram).

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Manual Testcases RBT"
+  short_description: "Sinh manual test cases chất lượng cao theo quy trình AI-RBT 6..."
+  default_prompt: "Use $generate-manual-testcases-rbt to perform this QA task."

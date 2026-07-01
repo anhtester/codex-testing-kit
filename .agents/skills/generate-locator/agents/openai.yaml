@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Locator"
+  short_description: "Sinh locator ổn định cho UI element. Hỗ trợ Playwright, Selen..."
+  default_prompt: "Use $generate-locator to perform this QA task."

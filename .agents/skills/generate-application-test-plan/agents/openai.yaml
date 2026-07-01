@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Application Test Plan"
+  short_description: "Khám phá ứng dụng web, sinh test plan và test scenarios. Hỗ t..."
+  default_prompt: "Use $generate-application-test-plan to perform this QA task."

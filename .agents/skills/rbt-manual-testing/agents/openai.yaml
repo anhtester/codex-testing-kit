@@ -1,0 +1,4 @@
+interface:
+  display_name: "RBT Manual Testing"
+  short_description: "Skill sinh manual test cases với 2 modes — QUICK (sinh nhanh..."
+  default_prompt: "Use $rbt-manual-testing to perform this QA task."

@@ -1,0 +1,23 @@
+$generate-automation-framework
+
+# CONTEXT
+Tôi cần xây dựng E2E Web UI Automation Framework từ đầu.
+- Công nghệ: Playwright Test + TypeScript (Strict Mode)
+- Test Runner: @playwright/test
+- Report: HTML Report + Allure (optional)
+
+# HỆ THỐNG
+- URL: [URL hệ thống]
+- Tài khoản test: [EMAIL] / [PASSWORD]
+
+# OUTPUT FORMAT
+- Setup package.json, tsconfig.json, playwright.config.ts
+- Triển khai Base classes, Fixtures
+- Khởi tạo Sample Page Object & Test
+- Cấu hình Environment & Utilities
+- Thiết lập CI/CD (GitHub Actions)
+- README.md hướng dẫn
+
+# GHI CHÚ
+- Agent tự scaffold TOÀN BỘ project structure dựa trên design gốc tại skill `$framework-architect`.
+- Agent tự verify framework hoạt động (npm install + chạy example test).

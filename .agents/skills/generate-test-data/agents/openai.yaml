@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Test Data"
+  short_description: "Sinh test data có cấu trúc, unique, traceable cho test cases...."
+  default_prompt: "Use $generate-test-data to perform this QA task."

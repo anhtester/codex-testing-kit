@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Automation Framework"
+  short_description: "Thiết kế và scaffold automation framework hoàn chỉnh. Hỗ trợ..."
+  default_prompt: "Use $generate-automation-framework to perform this QA task."

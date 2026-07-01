@@ -1,0 +1,51 @@
+# ============================================================
+# BƯỚC 6: CHUẨN HÓA FORMAT (Template Mapping)
+# ============================================================
+# Đây là prompt độc lập — copy & paste vào bất kỳ AI nào
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI đã review Test Cases ở Bước 5
+# 2. Tùy chỉnh quy tắc TC ID nếu cần
+# 3. Copy bảng output → paste vào Excel/Jira/TestRail
+# ============================================================
+
+---START---
+
+Đây là bước cuối cùng. Hãy **chuẩn hóa format** toàn bộ các Test Cases đã sinh ở Bước 5 vào bảng Markdown chuẩn, phù hợp để copy/paste sang Excel hoặc import vào Jira/Zephyr/Xray/TestRail.
+
+## Bảng chuẩn cần có các cột sau:
+
+| TC ID | Module | Risk Level | Test Title | Pre-Condition | Test Steps | Expected Result | Priority | Test Data |
+
+## Quy tắc khi lập bảng:
+
+### TC ID
+- Format thống nhất: `[DỰ_ÁN]_[MODULE]_TC_[SỐ]`
+- Ví dụ: `CRM_CUST_TC_001`, `CRM_CUST_TC_002`...
+- Tăng dần liên tục, không nhảy số
+
+[Tùy chỉnh: Nếu bạn muốn quy tắc ID khác, thay thế format ở trên.
+Ví dụ: `TC_LOGIN_001`, `TC_REG_001`...]
+
+### Test Steps & Expected Result
+- **PHẢI đánh số thứ tự** nếu có nhiều bước
+- Sử dụng `<br>` hoặc danh sách `-` để xuống dòng trong cell Markdown
+- Ví dụ trong cell:
+  ```
+  1. Mở trang Login<br>2. Nhập email: test@mail.com<br>3. Nhập password: Test@123<br>4. Click nút "Đăng nhập"
+  ```
+
+### Quy tắc TUYỆT ĐỐI:
+- ❌ **KHÔNG ĐƯỢC** bỏ sót hoặc rút gọn bất kỳ Test Case nào đã sinh ở Bước 5
+- ❌ **KHÔNG ĐƯỢC** tự ý gộp hoặc merge các Test Case khác nhau
+- ✅ Nếu bảng quá dài → Chia thành **Part 1, Part 2, Part 3...** và hỏi tôi để tiếp tục
+
+---
+
+## Output
+
+Xuất kết quả dưới dạng **Artifact** (file `.md`) để tôi có thể:
+- Copy trực tiếp bảng vào Excel/Google Sheets
+- Import vào Jira/TestRail/Xray
+
+Nếu tổng số Test Cases > 30, hãy chia artifact thành nhiều phần và hỏi tôi "Tiếp tục Part X?" trước khi sinh tiếp.

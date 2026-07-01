@@ -1,0 +1,60 @@
+# ============================================================
+# BƯỚC 4: ĐẢM BẢO ĐỘ BAO PHỦ (Traceability & Gap Analysis)
+# ============================================================
+# Đây là prompt độc lập — copy & paste vào bất kỳ AI nào
+# ============================================================
+# CÁCH DÙNG:
+# 1. Gửi prompt này SAU KHI đã review kết quả phân rã ở Bước 3
+# 2. Review danh sách scenarios AI sinh ra
+# 3. Bổ sung thêm scenarios nếu thiếu
+# 4. Xác nhận hoàn tất → sang Bước 5
+# ============================================================
+
+---START---
+
+Từ kết quả phân rã Module ở Bước 3, hãy xây dựng **Ma trận Truy xuất Yêu cầu (Traceability Matrix)** để đảm bảo độ bao phủ toàn diện (Coverage).
+
+## Nhiệm vụ:
+
+### 1. Traceability Mapping
+
+Map từng Module/Sub-module hoặc Rule logic với một **mã Yêu cầu định danh**:
+- Format: `REQ-01`, `REQ-02`, `REQ-03`...
+- Mỗi yêu cầu phải có mô tả ngắn gọn
+
+Trình bày dạng bảng:
+| REQ ID | Module | Mô tả Yêu cầu |
+|--------|--------|----------------|
+
+### 2. Gap Analysis (Kiểm tra thiếu sót)
+
+Kiểm tra chéo (Cross-check) xem có bất kỳ thông tin nào trong tài liệu gốc bị **thiếu** trong danh sách phân rã:
+- Chức năng chưa được map
+- Điều kiện đầu vào chưa được liệt kê
+- Quy tắc nghiệp vụ (Business Rule) bị bỏ sót
+
+**Nếu phát hiện thiếu sót, báo cáo cụ thể.**
+
+### 3. High-Level Test Scenarios
+
+Liệt kê các kịch bản kiểm thử ở **cấp độ High-Level** cho từng Module.
+
+Mỗi kịch bản chỉ cần **1 câu mô tả cốt lõi ngắn gọn**, tập trung vào:
+
+[Gợi ý trọng tâm (tùy chỉnh theo dự án):
+- **Security / Phân quyền:** Ai được phép làm gì?
+- **UI Validation:** Trường bắt buộc, format dữ liệu, giới hạn ký tự
+- **Business Logic:** Quy tắc tính toán, trạng thái chuyển đổi
+- **Data Integrity:** Dữ liệu có nhất quán giữa các module?
+- **Error Handling:** Hệ thống xử lý lỗi thế nào?]
+
+Trình bày dạng:
+| REQ ID | Module | Scenario ID | Mô tả Scenario |
+|--------|--------|-------------|-----------------|
+
+---
+
+⏸️ **SAU KHI HOÀN THÀNH**, hãy dừng lại để tôi review danh sách scenarios.
+Tôi sẽ bổ sung thêm hoặc xác nhận để sang Bước 5 sinh Test Case chi tiết.
+
+> ⚠️ **Đây là điểm chốt chặn nhân sự (Human Checkpoint).** Tester cần tự đánh giá rủi ro (Risk Assessment) cho từng Module trước khi cho AI sinh kịch bản chi tiết.

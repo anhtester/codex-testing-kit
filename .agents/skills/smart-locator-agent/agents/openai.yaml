@@ -1,0 +1,4 @@
+interface:
+  display_name: "Smart Locator Agent"
+  short_description: "Skill sinh locator ổn định và dễ bảo trì cho UI automation, h..."
+  default_prompt: "Use $smart-locator-agent to perform this QA task."
