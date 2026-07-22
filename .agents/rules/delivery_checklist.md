@@ -20,6 +20,7 @@ Use this checklist before declaring automation work complete.
 
 - Run the narrowest relevant test after implementation.
 - For UI automation, confirm stability with at least two consecutive successful runs when the environment permits.
+- For API automation, verify exact status codes, schema validation, key business fields, and OWASP security assertions according to `.agents/rules/api_rules.md`.
 - Capture screenshots on failures or meaningful milestones, not continuously.
 - Record any skipped cases, known issues, environmental blockers, or limitations.
 

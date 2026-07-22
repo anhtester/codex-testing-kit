@@ -25,27 +25,32 @@ Workflow này sử dụng **Mode QUICK** của skill `$rbt-manual-testing` để
    - Boundary Value Analysis (BVA)
    - Decision Table (nếu có nhiều rules)
    - State Transition (nếu có workflow)
-4. **Validation chuyên biệt từng trường (Field-Level Validation):**
+4. **Validation chuyên biệt từng trường (Field-Level Validation - 15 Field Types):**
    - Liệt kê tất cả input fields trên form/UI
-   - Sinh validation TCs **riêng cho TỪNG trường** theo đặc tính riêng (text, email, phone, date, number, dropdown, file upload, password...)
-   - Áp dụng **Bảng Field-Level Validation** trong skill `$rbt-manual-testing` để chọn validation phù hợp
+   - Sinh validation TCs **riêng cho TỪNG trường** theo đặc tính riêng (Text, Email, Phone, Date, Number, Dropdown, Checkbox/Radio, File Upload, Password, Textarea, OTP/MFA, Date Range, Rich Text, Multi-Select, Range Slider)
+   - Áp dụng **Bảng Field-Level Validation Checklist** trong skill `$rbt-manual-testing` để chọn validation phù hợp
    - **KHÔNG** gộp validation nhiều trường vào 1 test case
-5. **Sinh test cases đầy đủ fields:**
+5. **Bao phủ Scenarios Chuyên Sâu & Non-Functional:**
+   - Race Condition / Double Submit (double click nút submit, concurrent edit)
+   - Session & Network Resilience (session timeout mid-form, loss of network, slow 3G)
+   - Localization & UTF-8 / Emoji (tiếng Việt có dấu, emoji, ký tự đa ngôn ngữ)
+   - Keyboard Accessibility (Tab navigation, Enter/Space key, Focus state)
+6. **Sinh test cases đầy đủ fields & Metadata Automation:**
    - TC ID (format: `[DỰ_ÁN]_[MODULE]_TC_[SỐ]`)
-   - Module
-   - Test Scenario / Test Case Title
-   - Pre-conditions
-   - Test Steps (đánh số)
-   - Expected Results (đánh số tương ứng)
-   - Test Data (**phải cụ thể**, không placeholder)
-   - Priority (Critical / High / Medium / Low)
-6. **Xuất ra bảng Markdown chuẩn**
+   - Module, Test Scenario, Pre-conditions, Test Steps, Expected Results, Test Data (cụ thể), Priority
+   - Gắn đầy đủ metadata: `Automatable`, `Auto Type`, và `@Tags`
+7. **Chạy Self-Quality Gate (5 tiêu chí):** Rà soát lại 100% test cases trước khi xuất kết quả.
 
-## Bảng Output
+## Bảng Output Standard (chuẩn hóa đầy đủ Metadata)
 
+```markdown
+| TC ID | Module | Test Scenario | Pre-Condition | Test Steps | Expected Result | Test Data | Priority | Automatable | Auto Type | Tags |
 ```
-| TC ID | Module | Test Scenario | Pre-Condition | Test Steps | Test Data | Expected Result | Priority |
-```
+
+> **Giải thích Metadata Automation:**
+> - **Automatable:** `Yes` / `No` / `Partial` (Độ khả thi để viết script tự động)
+> - **Auto Type:** `UI` / `API` / `Unit` / `N/A` (Loại automation phù hợp)
+> - **Tags:** `@Smoke`, `@Regression`, `@CriticalPath`, `@Security`, `@Boundary`
 
 ## Quy tắc quan trọng
 
@@ -53,6 +58,7 @@ Workflow này sử dụng **Mode QUICK** của skill `$rbt-manual-testing` để
 - Phải bao gồm cả Positive, Negative, Boundary, và Edge cases
 - Mỗi trường input phải có validation TCs riêng (không gộp nhiều trường vào 1 TC)
 - TC ID theo format thống nhất do user quy ước hoặc mặc định `[DỰ_ÁN]_[MODULE]_TC_[SỐ]`
+- Chạy Self-Quality Gate rà soát chất lượng trước khi bàn giao
 - Nếu quá nhiều TCs → chia thành Part 1, Part 2 và hỏi user
 
 ## Khi nào chuyển sang FULL RBT

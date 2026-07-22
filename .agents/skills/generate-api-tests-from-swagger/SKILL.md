@@ -5,7 +5,7 @@ description: Sinh API test cases và automation scripts từ Swagger/OpenAPI spe
 
 # Workflow: Sinh API Tests từ Swagger/OpenAPI
 
-> **BẮT BUỘC (MANDATORY SKILL):** Bạn PHẢI nạp và đọc kỹ nội dung của skill **`$qa-automation-engineer`** (tại `.agents/skills/qa-automation-engineer/SKILL.md`) trước khi bắt đầu. Ngoài ra, tham khảo thêm skill **`$test-data-generator`** để sinh test data đúng chuẩn.
+> **BẮT BUỘC (MANDATORY SKILL & RULES):** Bạn PHẢI nạp và đọc kỹ nội dung của skill **`$qa-automation-engineer`** (tại `.agents/skills/qa-automation-engineer/SKILL.md`) và quy tắc **`api_rules.md`** (tại `.agents/rules/api_rules.md`) trước khi bắt đầu. Ngoài ra, tham khảo thêm skill **`$test-data-generator`** để sinh test data đúng chuẩn.
 
 Workflow này giúp agent phân tích Swagger/OpenAPI specification, xác định các endpoints, sinh API test cases có cấu trúc, và (tùy mode) tự động sinh automation scripts hoàn chỉnh.
 

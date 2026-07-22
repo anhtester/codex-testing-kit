@@ -5,6 +5,7 @@
 - Use repository skills from `.agents/skills` when the request matches their `description` or when the user invokes a skill with `$skill-name`.
 - Read only the relevant rule files before implementing or reviewing automation code:
   - `.agents/rules/automation_rules.md` for shared automation and test-data conventions.
+  - `.agents/rules/api_rules.md` for API automation and OWASP security rules.
   - `.agents/rules/locator_strategy.md` for locator selection.
   - `.agents/rules/playwright_rules.md` for Playwright work.
   - `.agents/rules/selenium_rules.md` for Selenium work.

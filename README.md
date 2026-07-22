@@ -25,7 +25,7 @@ Bộ Kit bao phủ quy trình kiểm thử từ phân tích yêu cầu, thiết 
 ```text
 codex-testing-kit/
 ├── .agents/
-│   ├── rules/              # 6 bộ quy tắc QA và automation
+│   ├── rules/              # 7 bộ quy tắc QA và automation
 │   └── skills/             # 26 Codex skills/workflows
 ├── plans/
 │   ├── manual/             # Quy trình Manual Testing AI-RBT 6 bước
@@ -41,7 +41,7 @@ codex-testing-kit/
 Codex tự đọc `AGENTS.md` trước khi làm việc trong repository. File này quy định:
 
 - Khi nào cần dùng repository skills trong `.agents/skills`.
-- Rule nào cần đọc cho Playwright, Selenium, Appium, locator và test data.
+- Rule nào cần đọc cho Playwright, Selenium, Appium, API, locator và test data.
 - Cách tương thích với các tên tool cũ còn tồn tại trong tài liệu đã migrate.
 - Quy ước giao tiếp, bảo toàn trạng thái Git và cách kiểm chứng automation code.
 
@@ -82,6 +82,7 @@ Ngoài các workflow trên, repository còn có các skill nền tảng như `$q
 | File | Phạm vi |
 |------|---------|
 | `automation_rules.md` | Quy ước automation, POM, naming và test data |
+| `api_rules.md` | Quy tắc kiểm thử API Automation và OWASP Security Checklist |
 | `locator_strategy.md` | Thứ tự ưu tiên locator ổn định |
 | `playwright_rules.md` | Quy tắc riêng cho Playwright |
 | `selenium_rules.md` | Quy tắc riêng cho Selenium |
